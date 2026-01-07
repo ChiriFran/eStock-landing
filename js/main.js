@@ -1,104 +1,110 @@
 gsap.from(".logo", {
-    y: -100,
-    ease: "power3.out",
-    duration: 1,
-})
+  y: -100,
+  ease: "power3.out",
+  duration: 1,
+});
 
 gsap.from(".menu-item", {
-    y: -100,
-    ease: "power3.out",
-    duration: 1,
-    stagger: 0.10
-})
+  y: -100,
+  ease: "power3.out",
+  duration: 1,
+  stagger: 0.1,
+});
 
-const text = new SplitType('.hero-title', { types: "words, chars" });
+const text = new SplitType(".hero-title", { types: "words, chars" });
 
 const colores = ["#307fe0", "#307fe0ab"]; // Solo naranja y azul
 const colorFinal = "#292827"; // Blanco final
 
-const colorAleatorio = () => colores[Math.floor(Math.random() * colores.length)];
+const colorAleatorio = () =>
+  colores[Math.floor(Math.random() * colores.length)];
 
 // Desactivar hover inicialmente
 let hoverHabilitado = false;
 
 text.chars.forEach((char, index) => {
-    let charsTl = gsap.timeline();
+  let charsTl = gsap.timeline();
 
-    charsTl.from(char, {
-        y: gsap.utils.random(-100, 100),
-        x: gsap.utils.random(-300, 300),
-        rotate: gsap.utils.random(-360, 360),
-        scale: gsap.utils.random(0, 2),
-        opacity: 0,
-        duration: .75,
+  charsTl.from(char, {
+    y: gsap.utils.random(-100, 100),
+    x: gsap.utils.random(-300, 300),
+    rotate: gsap.utils.random(-360, 360),
+    scale: gsap.utils.random(0, 2),
+    opacity: 0,
+    duration: 0.75,
+    ease: "back.out",
+    delay: index * 0.01,
+  });
+
+  charsTl.from(
+    char,
+    {
+      color: colorAleatorio(),
+      duration: 1,
+    },
+    "-=.25"
+  );
+
+  // Al final de la animación, asegurarse que quede en blanco y habilitar el hover
+  charsTl.to(char, {
+    color: colorFinal,
+    duration: 0.2,
+    onComplete: () => {
+      if (index === text.chars.length - 1) {
+        // Habilitamos hover una vez que se animaron todas
+        hoverHabilitado = true;
+      }
+    },
+  });
+
+  // Hover
+  function charsHover() {
+    if (!hoverHabilitado) return; // Si aún no terminó la animación, no hacer nada
+
+    gsap
+      .timeline()
+      .to(char, {
+        y: gsap.utils.random(-15, 15),
+        x: gsap.utils.random(-15, 15),
+        rotate: gsap.utils.random(-40, 40),
+        scale: gsap.utils.random(0.8, 1.2),
+        duration: 0.5,
         ease: "back.out",
-        delay: index * 0.01
-    });
-
-    charsTl.from(char, {
         color: colorAleatorio(),
-        duration: 1,
-    }, "-=.25");
-
-    // Al final de la animación, asegurarse que quede en blanco y habilitar el hover
-    charsTl.to(char, {
-        color: colorFinal,
-        duration: 0.2,
+        onStart: () => {
+          char.removeEventListener("mouseenter", charsHover);
+        },
+      })
+      .to(char, {
+        y: 0,
+        x: 0,
+        rotate: 0,
+        scale: 1,
+        color: colorFinal, // Asegura que siempre vuelva a blanco
+        delay: 1,
+        duration: 0.3,
+        ease: "back.out",
         onComplete: () => {
-            if (index === text.chars.length - 1) {
-                // Habilitamos hover una vez que se animaron todas
-                hoverHabilitado = true;
-            }
-        }
-    });
+          setTimeout(() => {
+            char.addEventListener("mouseenter", charsHover);
+          }, 100);
+        },
+      });
+  }
 
-    // Hover
-    function charsHover() {
-        if (!hoverHabilitado) return; // Si aún no terminó la animación, no hacer nada
-
-        gsap.timeline()
-            .to(char, {
-                y: gsap.utils.random(-15, 15),
-                x: gsap.utils.random(-15, 15),
-                rotate: gsap.utils.random(-40, 40),
-                scale: gsap.utils.random(0.8, 1.2),
-                duration: .5,
-                ease: "back.out",
-                color: colorAleatorio(),
-                onStart: () => {
-                    char.removeEventListener("mouseenter", charsHover);
-                }
-            })
-            .to(char, {
-                y: 0,
-                x: 0,
-                rotate: 0,
-                scale: 1,
-                color: colorFinal, // Asegura que siempre vuelva a blanco
-                delay: 1,
-                duration: .3,
-                ease: "back.out",
-                onComplete: () => {
-                    setTimeout(() => {
-                        char.addEventListener("mouseenter", charsHover);
-                    }, 100);
-                }
-            });
-    }
-
-    char.addEventListener("mouseenter", charsHover);
+  char.addEventListener("mouseenter", charsHover);
 });
 
 /* hero Text */
 // Dividir el párrafo en palabras
-const heroText = new SplitType('.hero-text', { types: "words" });
+const heroText = new SplitType(".hero-text", { types: "words" });
 
 gsap.from(heroText.words, {
-    opacity: 0,
-    y: 20,
-    stagger: 0.008, // muy rápido
-    duration: 0.5,
-    ease: "power2.out",
+  opacity: 0,
+  y: 20,
+  stagger: 0.008, // muy rápido
+  duration: 0.5,
+  ease: "power2.out",
 });
 
 /* hero stats */
@@ -108,43 +114,43 @@ const statTexts = new SplitType(".text", { types: "words" });
 
 // Animar números (caracteres)
 gsap.from(statNumbers.chars, {
-    opacity: 0,
-    y: 20,
-    stagger: 0.05,
-    duration: 0.5,
-    ease: "power2.out"
+  opacity: 0,
+  y: 20,
+  stagger: 0.05,
+  duration: 0.5,
+  ease: "power2.out",
 });
 
 // Animar textos (palabras)
 gsap.from(statTexts.words, {
-    opacity: 0,
-    y: 20,
-    stagger: 0.08,
-    duration: 0.5,
-    ease: "power2.out"
+  opacity: 0,
+  y: 20,
+  stagger: 0.08,
+  duration: 0.5,
+  ease: "power2.out",
 });
 
 /* hero stat hover */
 const heroStats = document.querySelectorAll(".hero-stat");
 
 heroStats.forEach((stat) => {
-    const bg = stat.querySelector(".hover-bg");
+  const bg = stat.querySelector(".hover-bg");
 
-    stat.addEventListener("mouseenter", () => {
-        gsap.to(bg, {
-            scaleY: 1,
-            duration: 0.4,
-            ease: "power2.out"
-        });
+  stat.addEventListener("mouseenter", () => {
+    gsap.to(bg, {
+      scaleY: 1,
+      duration: 0.4,
+      ease: "power2.out",
     });
+  });
 
-    stat.addEventListener("mouseleave", () => {
-        gsap.to(bg, {
-            scaleY: 0,
-            duration: 0.4,
-            ease: "power2.in"
-        });
+  stat.addEventListener("mouseleave", () => {
+    gsap.to(bg, {
+      scaleY: 0,
+      duration: 0.4,
+      ease: "power2.in",
     });
+  });
 });
 
 /* services items */
@@ -156,28 +162,26 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(ScrollTrigger);
 
 gsap.utils.toArray(".hero-services-item").forEach((item, index) => {
+  gsap.set(item, {
+    opacity: 0,
+    y: 40,
+    scale: 0.94,
+    transformPerspective: 800,
+  });
 
-    gsap.set(item, {
-        opacity: 0,
-        y: 40,
-        scale: 0.94,
-        transformPerspective: 800
-    });
-
-    gsap.to(item, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.7,
-        ease: "expo.out",
-        delay: index * 0.08,
-        scrollTrigger: {
-            trigger: item,
-            start: "top 85%",
-            once: true
-        }
-    });
-
+  gsap.to(item, {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    duration: 0.7,
+    ease: "expo.out",
+    delay: index * 0.08,
+    scrollTrigger: {
+      trigger: item,
+      start: "top 85%",
+      once: true,
+    },
+  });
 });
 
 /* mockup */
@@ -185,73 +189,221 @@ gsap.utils.toArray(".hero-services-item").forEach((item, index) => {
 gsap.registerPlugin(ScrollTrigger);
 
 const videoTl = gsap.timeline({
-    scrollTrigger: {
-        trigger: ".videoContainer",
-        start: "top 80%",
-        once: true
-    }
+  scrollTrigger: {
+    trigger: ".videoContainer",
+    start: "top 80%",
+    once: true,
+  },
 });
 
 videoTl
-.from(".videoContent", {
+  .from(".videoContent", {
     opacity: 0,
     y: 20,
     duration: 0.5,
-    ease: "power2.out"
-})
-.from(
+    ease: "power2.out",
+  })
+  .from(
     ".videoText h2, .videoText p",
     {
-        opacity: 0,
-        y: 18,
-        duration: 0.55,
-        ease: "power2.out",
-        stagger: 0.08
+      opacity: 0,
+      y: 18,
+      duration: 0.55,
+      ease: "power2.out",
+      stagger: 0.08,
     },
     "-=0.3"
-)
-.from(
+  )
+  .from(
     ".videoMockup img",
     {
-        opacity: 0,
-        y: 40,
-        duration: 0.7,
-        ease: "power3.out",
-        onComplete: startVideoFloating
+      opacity: 0,
+      y: 40,
+      duration: 0.7,
+      ease: "power3.out",
+      onComplete: startVideoFloating,
     },
     "-=0.45"
-);
+  );
 
 /* floating suave del mockup */
 function startVideoFloating() {
-    gsap.to(".videoMockup img", {
-        y: "+=28",
-        duration: 2.2,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1
-    });
+  gsap.to(".videoMockup img", {
+    y: "+=28",
+    duration: 2.2,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1,
+  });
 }
-
 
 // Forzar recalcular el ScrollTrigger tras la carga
 gsap.delayedCall(0.1, () => ScrollTrigger.refresh());
 
-// Scroll horizontal 
+// Scroll horizontal
 const scrollInner = document.querySelector(".scrollInner");
-const totalScroll = scrollInner.scrollWidth - window.innerWidth;
 
-gsap.to(scrollInner, {
-    x: () => -totalScroll,
-    ease: "none",
-    scrollTrigger: {
-        trigger: ".scrollSection",
-        start: "top top",
-        end: () => `+=${scrollInner.scrollWidth}`,
-        scrub: 2,
-        pin: true,
-        anticipatePin: 1,
-        invalidateOnRefresh: true
-    }
+const scrollTween = gsap.to(scrollInner, {
+  x: () => -(scrollInner.scrollWidth - window.innerWidth),
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".scrollSection",
+    start: "top top",
+    end: () => `+=${scrollInner.scrollWidth - window.innerWidth}`,
+    scrub: 2,
+    pin: true,
+    anticipatePin: 1,
+    invalidateOnRefresh: true,
+  },
 });
 
+/* animaiones de entrada scroll horizontal */
+gsap.utils.toArray(".scrollItem").forEach((item) => {
+  const content = item.querySelector(".scrollContent");
+  const media = item.querySelector(".scrollMedia img");
+  const features = item.querySelectorAll(".scrollFeatures li");
+
+  gsap.set([content, media, features], {
+    opacity: 0,
+    y: 24,
+  });
+
+  gsap.set(media, {
+    scale: 0.97,
+  });
+
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: item,
+        containerAnimation: scrollTween, // ✅ CLAVE
+        start: "left 70%",
+        once: true,
+      },
+    })
+    .to(content, {
+      opacity: 1,
+      y: 0,
+      duration: 0.55,
+      ease: "power3.out",
+    })
+    .to(
+      features,
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.06,
+        duration: 0.4,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    )
+    .to(
+      media,
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.6,
+        ease: "power3.out",
+      },
+      "-=0.4"
+    );
+});
+
+/* anim requerimientos */
+gsap.from(".requirements-header h2, .requirements-header p", {
+  opacity: 0,
+  y: 20,
+  duration: 0.6,
+  ease: "power2.out",
+  stagger: 0.12,
+  scrollTrigger: {
+    trigger: ".requirements-section",
+    start: "top 80%",
+    once: true,
+  },
+});
+
+gsap.from(".requirement-card", {
+  opacity: 0,
+  y: 28,
+  scale: 0.96,
+  duration: 0.6,
+  ease: "power3.out",
+  stagger: 0.1,
+  scrollTrigger: {
+    trigger: ".requirements-grid",
+    start: "top 75%",
+    once: true,
+  },
+});
+
+gsap.from(".requirements-footer", {
+  opacity: 0,
+  y: 18,
+  duration: 0.5,
+  ease: "power2.out",
+  scrollTrigger: {
+    trigger: ".requirements-footer",
+    start: "top 85%",
+    once: true,
+  },
+});
+
+ScrollTrigger.matchMedia({
+  // 📱 MOBILE
+  "(max-width: 768px)": function () {
+    gsap.utils.toArray(".scrollItem").forEach((item) => {
+      const content = item.querySelector(".scrollContent");
+      const media = item.querySelector(".scrollMedia img");
+      const features = item.querySelectorAll(".scrollFeatures li");
+
+      if (!content || !media) return;
+
+      gsap.set([content, media, features], {
+        opacity: 0,
+        y: 24,
+      });
+
+      gsap.set(media, { scale: 0.98 });
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: item,
+            start: "top 80%",
+            once: true,
+          },
+        })
+        .to(content, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        })
+        .to(
+          features,
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.05,
+            duration: 0.35,
+            ease: "power2.out",
+          },
+          "-=0.25"
+        )
+        .to(
+          media,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.55,
+            ease: "power3.out",
+          },
+          "-=0.35"
+        );
+    });
+  },
+});

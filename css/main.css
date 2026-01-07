@@ -483,12 +483,12 @@ body {
 
 /* slide */
 .scrollItem {
-  flex: 0 0 100%;
+  flex: 0 0 80%;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
   padding: 0 10%;
-  gap: 4rem;
+  gap: 2rem;
   background: var(--clr-white);
 }
 
@@ -826,6 +826,8 @@ body {
   margin-top: 5rem;
 }
 
+/* esquina con dibujo */
+/* 
 .footerContainer::after {
   content: "";
   position: absolute;
@@ -840,7 +842,7 @@ body {
   background-repeat: no-repeat;
   background-position: 0 100%;
   z-index: 0;
-}
+} */
 
 .footerContainer h2 {
   font-size: 3rem;
@@ -869,6 +871,8 @@ body {
 .contactoContainer span {
   font-family: var(--ff-titles);
   font-size: 1rem;
+  font-weight: 900;
+  color: var(--clr-light-blue);
   margin-right: 1rem;
 }
 
@@ -1024,6 +1028,7 @@ body {
   .scrollInner {
     flex-direction: column;
     transform: none !important;
+    padding: 0;
   }
 
   .scrollItem {

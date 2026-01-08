@@ -55,6 +55,22 @@ body {
   font-weight: 700;
 }
 
+.menu-item{
+  padding: 5px 15px;
+}
+
+.menu-item a{
+  color: #292827;
+  text-decoration: none;
+}
+
+.menu-item:last-of-type{
+  background-color: var(--clr-light-blue);
+  padding: 5px 15px;
+  border-radius: 0.5rem;
+  color: var(--clr-white);
+}
+
 .logo {
   font-family: var(--ff-titles);
   font-size: 2.5rem;
@@ -64,7 +80,6 @@ body {
 /* =====================
    HERO BASE
 ===================== */
-
 .hero {
   position: relative;
   min-height: 100vh;
@@ -213,7 +228,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  padding: 0 12% 2%;
+  padding: 5% 12% 2%;
 }
 
 .hero-services-container:last-of-type {
@@ -309,6 +324,20 @@ body {
   font-weight: 900;
   margin-bottom: 0.5rem;
   transition: color 0.3s ease;
+}
+
+.hero-services-item-price{
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #292827;
+  margin-bottom: 1rem;
+}
+
+/* CTA en hover / active */
+.hero-services-item:hover p,
+.hero-services-item:active p,
+.hero-services-item:focus-visible p {
+  color: var(--clr-white);
 }
 
 /* CTA / botón */

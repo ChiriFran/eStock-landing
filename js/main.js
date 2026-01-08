@@ -11,88 +11,17 @@ gsap.from(".menu-item", {
   stagger: 0.1,
 });
 
-const text = new SplitType(".hero-title", { types: "words, chars" });
+/* HERO TITLE */
+const heroTitle = new SplitType(".hero-title", {
+  types: "words"
+});
 
-const colores = ["#307fe0", "#307fe0ab"]; // Solo naranja y azul
-const colorFinal = "#292827"; // Blanco final
-
-const colorAleatorio = () =>
-  colores[Math.floor(Math.random() * colores.length)];
-
-// Desactivar hover inicialmente
-let hoverHabilitado = false;
-
-text.chars.forEach((char, index) => {
-  let charsTl = gsap.timeline();
-
-  charsTl.from(char, {
-    y: gsap.utils.random(-100, 100),
-    x: gsap.utils.random(-300, 300),
-    rotate: gsap.utils.random(-360, 360),
-    scale: gsap.utils.random(0, 2),
-    opacity: 0,
-    duration: 0.75,
-    ease: "back.out",
-    delay: index * 0.01,
-  });
-
-  charsTl.from(
-    char,
-    {
-      color: colorAleatorio(),
-      duration: 1,
-    },
-    "-=.25"
-  );
-
-  // Al final de la animación, asegurarse que quede en blanco y habilitar el hover
-  charsTl.to(char, {
-    color: colorFinal,
-    duration: 0.2,
-    onComplete: () => {
-      if (index === text.chars.length - 1) {
-        // Habilitamos hover una vez que se animaron todas
-        hoverHabilitado = true;
-      }
-    },
-  });
-
-  // Hover
-  function charsHover() {
-    if (!hoverHabilitado) return; // Si aún no terminó la animación, no hacer nada
-
-    gsap
-      .timeline()
-      .to(char, {
-        y: gsap.utils.random(-15, 15),
-        x: gsap.utils.random(-15, 15),
-        rotate: gsap.utils.random(-40, 40),
-        scale: gsap.utils.random(0.8, 1.2),
-        duration: 0.5,
-        ease: "back.out",
-        color: colorAleatorio(),
-        onStart: () => {
-          char.removeEventListener("mouseenter", charsHover);
-        },
-      })
-      .to(char, {
-        y: 0,
-        x: 0,
-        rotate: 0,
-        scale: 1,
-        color: colorFinal, // Asegura que siempre vuelva a blanco
-        delay: 1,
-        duration: 0.3,
-        ease: "back.out",
-        onComplete: () => {
-          setTimeout(() => {
-            char.addEventListener("mouseenter", charsHover);
-          }, 100);
-        },
-      });
-  }
-
-  char.addEventListener("mouseenter", charsHover);
+gsap.from(heroTitle.words, {
+  opacity: 0,
+  y: 40,
+  stagger: 0.05,
+  duration: 0.8,
+  ease: "power3.out"
 });
 
 /* hero Text */

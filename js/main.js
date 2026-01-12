@@ -13,7 +13,7 @@ gsap.from(".menu-item", {
 
 /* HERO TITLE */
 const heroTitle = new SplitType(".hero-title", {
-  types: "words"
+  types: "words",
 });
 
 gsap.from(heroTitle.words, {
@@ -21,7 +21,7 @@ gsap.from(heroTitle.words, {
   y: 40,
   stagger: 0.05,
   duration: 0.8,
-  ease: "power3.out"
+  ease: "power3.out",
 });
 
 /* hero Text */
@@ -170,19 +170,36 @@ function startVideoFloating() {
 gsap.delayedCall(0.1, () => ScrollTrigger.refresh());
 
 // Scroll horizontal
-const scrollInner = document.querySelector(".scrollInner");
+let scrollTween;
 
-const scrollTween = gsap.to(scrollInner, {
-  x: () => -(scrollInner.scrollWidth - window.innerWidth),
-  ease: "none",
-  scrollTrigger: {
-    trigger: ".scrollSection",
-    start: "top top",
-    end: () => `+=${scrollInner.scrollWidth - window.innerWidth}`,
-    scrub: 2,
-    pin: true,
-    anticipatePin: 1,
-    invalidateOnRefresh: true,
+ScrollTrigger.matchMedia({
+  // 🖥️ Desktop: scroll horizontal
+  "(min-width: 769px)": function () {
+    const scrollInner = document.querySelector(".scrollInner");
+
+    scrollTween = gsap.to(scrollInner, {
+      x: () => -(scrollInner.scrollWidth - window.innerWidth),
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".scrollSection",
+        start: "top top",
+        end: () => `+=${scrollInner.scrollWidth - window.innerWidth}`,
+        scrub: 2,
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+      },
+    });
+  },
+
+  // 📱 Mobile: sin scroll horizontal
+  "(max-width: 768px)": function () {
+    if (scrollTween) scrollTween.kill();
+    ScrollTrigger.getAll().forEach((st) => {
+      if (st.trigger && st.trigger.classList.contains("scrollSection")) {
+        st.kill();
+      }
+    });
   },
 });
 

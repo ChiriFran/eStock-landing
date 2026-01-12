@@ -1284,8 +1284,8 @@ body.modal-open {
 
   /* ---------- SCROLL SECTION ---------- */
   .scrollSection {
-    height: 50%;
-    overflow: visible;
+    height: auto;
+    overflow-y: visible;
   }
 
   .scrollInner {

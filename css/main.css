@@ -64,9 +64,9 @@ body {
   text-decoration: none;
 }
 
-.contactoBtn:hover {
+.contactoBtn:hover{
   color: var(--clr-white);
-  transition: 0.2s;
+  transition: .2s;
 }
 
 .menu-item:last-of-type {
@@ -1129,7 +1129,7 @@ body.modal-open {
   margin-bottom: 2rem;
 }
 
-.footerContainer a {
+.footerContainer a{
   text-decoration: none;
   color: var(--clr-white);
 }
@@ -1285,8 +1285,7 @@ body.modal-open {
   /* ---------- SCROLL SECTION ---------- */
   .scrollSection {
     height: auto;
-    overflow-x: hidden;
-    overflow-y: visible;
+    overflow: visible;
   }
 
   .scrollInner {
@@ -1323,7 +1322,7 @@ body.modal-open {
 
   /* ---------- FOOTER ---------- */
   .footerContainer {
-    padding: 0 1rem;
+    padding: 2rem 1rem;
   }
 
   .footerContainer h2 {

@@ -1176,7 +1176,7 @@ body.modal-open {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 75%;
+    width: 60%;
     height: 100vh;
     background-color: var(--clr-white);
     backdrop-filter: blur(10px);

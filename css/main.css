@@ -1284,6 +1284,7 @@ body.modal-open {
 
   /* ---------- SCROLL SECTION ---------- */
   .scrollSection {
+    position: relative;
     height: auto;
     overflow-y: visible;
   }

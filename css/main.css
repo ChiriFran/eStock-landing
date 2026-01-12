@@ -1323,7 +1323,7 @@ body.modal-open {
 
   /* ---------- FOOTER ---------- */
   .footerContainer {
-    padding: 2rem 1rem;
+    padding: 0 1rem;
   }
 
   .footerContainer h2 {

@@ -64,6 +64,11 @@ body {
   text-decoration: none;
 }
 
+.contactoBtn:hover{
+  color: var(--clr-white);
+  transition: .2s;
+}
+
 .menu-item:last-of-type {
   background-color: var(--clr-light-blue);
   padding: 5px 15px;
@@ -324,6 +329,27 @@ body {
   font-weight: 900;
   margin-bottom: 0.5rem;
   transition: color 0.3s ease;
+}
+
+/* etiqueta de descuento */
+.price-discount {
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+
+  background-color: var(--clr-light-blue);
+  color: var(--clr-white);
+
+  line-height: 1;
+}
+
+/* cuando está en hover y cambia el fondo */
+.hero-services-item:hover .price-discount,
+.hero-services-item:active .price-discount,
+.hero-services-item:focus-visible .price-discount {
+  background-color: var(--clr-white);
+  color: var(--clr-light-blue);
 }
 
 .hero-services-item-price {
@@ -634,6 +660,7 @@ body.modal-open {
   color: var(--clr-white);
   max-width: 520px;
   opacity: 0.9;
+  margin-bottom: 3rem;
 }
 
 /* Mockup */

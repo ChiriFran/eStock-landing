@@ -1286,7 +1286,7 @@ body.modal-open {
   .scrollSection {
     position: relative;
     height: auto;
-    overflow-y: visible;
+    overflow: hidden;
   }
 
   .scrollInner {

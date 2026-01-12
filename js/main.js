@@ -353,3 +353,30 @@ ScrollTrigger.matchMedia({
     });
   },
 });
+
+/* footer */
+gsap.from(".footerContainer h2", {
+  opacity: 0,
+  y: 30,
+  duration: 0.6,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: ".footerContainer",
+    start: "top 85%",
+    once: true,
+  },
+});
+
+gsap.from(".footerContainer .contactoBtn", {
+  opacity: 0,
+  y: 20,
+  scale: 0.95,
+  duration: 0.5,
+  ease: "power2.out",
+  delay: 0.2,
+  scrollTrigger: {
+    trigger: ".footerContainer",
+    start: "top 85%",
+    once: true,
+  },
+});

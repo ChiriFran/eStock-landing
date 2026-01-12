@@ -1301,6 +1301,24 @@ body.modal-open {
     text-align: center;
   }
 
+  .scrollItem {
+    padding: 1rem 1rem;
+    width: 100%;
+  }
+
+  .scrollMedia::before {
+    max-width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .scrollSection,
+  .scrollInner,
+  .scrollItem {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
   .scrollItem h2 {
     font-size: 2.2rem;
   }

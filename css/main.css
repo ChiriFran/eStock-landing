@@ -1130,16 +1130,9 @@ body.modal-open {
   margin-bottom: 2rem;
 }
 
-.contactoContainer {
-  margin-bottom: 3rem;
-}
-
-.contactoContainer span {
-  font-family: var(--ff-titles);
-  font-size: 1rem;
-  font-weight: 900;
-  color: var(--clr-light-blue);
-  margin-right: 1rem;
+.footerContainer a{
+  text-decoration: none;
+  color: var(--clr-white);
 }
 
 @media (max-width: 1024px) {
@@ -1281,7 +1274,7 @@ body.modal-open {
 
   /* ---------- VIDEO ---------- */
   .videoContainer {
-    height: 50vh;
+    padding: 5rem 0.5rem;
   }
 
   .videoContainer::after {
@@ -1303,7 +1296,6 @@ body.modal-open {
 
   .scrollItem {
     flex: none;
-    min-height: 60vh;
     flex-direction: column;
     text-align: center;
   }
@@ -1335,10 +1327,5 @@ body.modal-open {
 
   .footerContainer h2 {
     font-size: 2rem;
-  }
-
-  .contactoContainer span {
-    display: block;
-    margin-bottom: 0.5rem;
   }
 }

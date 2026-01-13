@@ -1081,6 +1081,121 @@ body.modal-open {
   opacity: 0.8;
 }
 
+/* preguntas recuentes */
+.faqSection {
+  position: relative;
+  padding: 100px 20px;
+  background: var(--clr-white);
+  color: #292827;
+  font-family: var(--ff-titles);
+  z-index: 2;
+}
+
+/* imagen decorativa */
+.faqSection::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 30%;
+  height: 100%;
+
+  background-image: url("../img/background-hero-circle-&-dots.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom right;
+
+  pointer-events: none;
+
+  transition: opacity 0.4s ease, transform 0.8s ease;
+  z-index: -10;
+}
+
+.faqContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 10;
+}
+
+.faqTag {
+  color: #3b82f6;
+  font-family: var(--ff-texts);
+  font-weight: 600;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.faqTitle {
+  font-size: 3rem;
+  font-family: var(--ff-titles);
+  margin: 10px 0;
+}
+
+.faqSubtitle {
+  font-family: var(--ff-texts);
+  margin-bottom: 50px;
+  opacity: 0.7;
+}
+
+.faqList {
+  text-align: left;
+}
+
+.faqItem {
+  border-bottom: 4px solid #0472f057;
+}
+
+.faqQuestion {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #292827;
+  padding: 20px 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.faqIcon {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.faqItem.active .faqIcon {
+  transform: rotate(45deg);
+}
+
+.faqAnswer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 10px;
+  opacity: 0.9;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.faqItem.active .faqAnswer {
+  max-height: 200px;
+  padding: 10px 10px 20px;
+}
+
+/* Animación al aparecer */
+.faqItem {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.faqItem.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* footer */
 .footerContainer {
   position: relative;
@@ -1337,6 +1452,24 @@ body.modal-open {
     line-height: 1.4;
     padding: 0.5rem 1rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  }
+
+  /* preguntas frecuentes */
+  .faqSection {
+    padding: 100px 0.5rem 0.5rem;
+  }
+
+  /* imagen decorativa */
+  .faqSection::after {
+    display: none;
+  }
+
+  .faqTag {
+    font-size: 1.2rem;
+  }
+
+  .faqTitle {
+    font-size: 1.8rem;
   }
 
   /* ---------- FOOTER ---------- */

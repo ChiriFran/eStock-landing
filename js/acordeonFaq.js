@@ -36,7 +36,7 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.from(".faqTag", {
   y: 40,
   opacity: 0,
-  duration: 0.8,
+  duration: 0.7,
   ease: "power3.out",
   scrollTrigger: {
     trigger: ".faqSection",

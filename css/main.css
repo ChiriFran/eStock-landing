@@ -775,7 +775,7 @@ p.stat-number {
   backdrop-filter: blur(8px);
   opacity: 0;
   pointer-events: none;
-  z-index: 999;
+  z-index: 100000;
 }
 
 /* MODAL */
@@ -793,7 +793,7 @@ p.stat-number {
   border-radius: 1rem;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
   opacity: 0;
-  z-index: 1000;
+  z-index: 100000;
   pointer-events: none;
   display: flex;
   flex-direction: column;

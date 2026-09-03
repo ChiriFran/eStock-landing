@@ -1,5 +1,11 @@
 /* ========= GLOBAL SCROLL ========= */
-let savedScrollY = 0;
+function lockBodyScroll() {
+  document.body.classList.add("modal-open");
+}
+
+function unlockBodyScroll() {
+  document.body.classList.remove("modal-open");
+}
 
 /* ========= STARTER MODAL ========= */
 const starterModal = document.getElementById("starterModal");
@@ -29,9 +35,7 @@ starterTl
 
 openStarter.addEventListener("click", () => {
   closeProModal(true);
-  savedScrollY = window.scrollY;
-  document.body.style.top = `-${savedScrollY}px`;
-  document.body.classList.add("modal-open");
+  lockBodyScroll();
   starterTl.play(0);
 });
 
@@ -48,11 +52,7 @@ function closeStarterModal(skipScrollRestore) {
     pointerEvents: "none",
     duration: 0.3,
     onComplete: () => {
-      document.body.classList.remove("modal-open");
-      document.body.style.top = "";
-      if (!skipScrollRestore) {
-        window.scrollTo(0, savedScrollY);
-      }
+      unlockBodyScroll(skipScrollRestore);
     },
   });
 }
@@ -88,9 +88,7 @@ proTl
 
 openPro.addEventListener("click", () => {
   closeStarterModal(true);
-  savedScrollY = window.scrollY;
-  document.body.style.top = `-${savedScrollY}px`;
-  document.body.classList.add("modal-open");
+  lockBodyScroll();
   proTl.play(0);
 });
 
@@ -107,11 +105,7 @@ function closeProModal(skipScrollRestore) {
     pointerEvents: "none",
     duration: 0.3,
     onComplete: () => {
-      document.body.classList.remove("modal-open");
-      document.body.style.top = "";
-      if (!skipScrollRestore) {
-        window.scrollTo(0, savedScrollY);
-      }
+      unlockBodyScroll(skipScrollRestore);
     },
   });
 }
